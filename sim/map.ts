@@ -36,6 +36,14 @@ export default class SimMap {
   }
 
   addLocation(newLocation: SimLocation) {
+    if (
+      newLocation.x < 0 ||
+      newLocation.x > this.size[0] ||
+      newLocation.y < 0 ||
+      newLocation.y > this.size[1]
+    ) {
+      throw new Error('Location outside bounds of map')
+    }
     const hash = this.hashLocation(newLocation)
     const label = newLocation.label
     if (hash in this.locationsByCoord || label in this.locations) {

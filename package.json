@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-hook/resize-observer": "^1.2.5",
     "compromise": "^14.1.0",
     "next": "12.1.4",
     "pts": "^0.10.9",
