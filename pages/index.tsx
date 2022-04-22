@@ -16,20 +16,20 @@ by aditya rathod
 `
 
 const m = new SimMap()
-const loc: SimLocation = { label: 'A', x: 50, y: 50 }
-const loc2: SimLocation = { label: 'B', x: 10, y: 10 }
-const loc3: SimLocation = { label: 'D', x: 50, y: 10 }
-const robo = new SimRobot('bob', loc)
-const robo2 = new SimRobot('bob2', loc)
-m.addLocation(loc)
-m.addLocation(loc2)
-m.addLocation(loc3)
-m.addPath({ from: 'A', to: 'B' })
-m.addPath({ from: 'B', to: 'D' })
-m.addRobot(robo)
-m.addRobot(robo2)
-m.addRobotDestination('bob', 'D')
-m.addRobotDestination('bob2', 'D')
+// const loc: SimLocation = { label: 'A', x: 50, y: 50 }
+// const loc2: SimLocation = { label: 'B', x: 10, y: 10 }
+// const loc3: SimLocation = { label: 'D', x: 50, y: 10 }
+// const robo = new SimRobot('bob', loc)
+// const robo2 = new SimRobot('bob2', loc)
+// m.addLocation(loc)
+// m.addLocation(loc2)
+// m.addLocation(loc3)
+// m.addPath({ from: 'A', to: 'B' })
+// m.addPath({ from: 'B', to: 'D' })
+// m.addRobot(robo)
+// m.addRobot(robo2)
+// m.addRobotDestination('bob', 'D')
+// m.addRobotDestination('bob2', 'D')
 
 const Home: NextPage = () => {
   const [logs, setLogs] = useState<string[]>([ABOUT_MESSAGE])

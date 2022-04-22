@@ -1,0 +1,11 @@
+add location A 50 50
+add location B 10 10
+add location D 50 10
+add edge from A > B
+add edge from B > D
+add edge from D > B
+add edge from B > A
+add bot bob at A
+add bot bob2 at D
+move bot bob to D
+move bot bob2 to A

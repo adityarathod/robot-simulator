@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react'
+import { ChangeEventHandler, FC, useEffect, useRef } from 'react'
 
 interface ConsoleProps {
   logs: string[]
@@ -14,6 +14,23 @@ const Console: FC<ConsoleProps> = ({ logs, onInput, className = '' }) => {
       el.current.scrollTop = el.current.scrollHeight
     }
   }, [logs])
+
+  const readFile: ChangeEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault()
+    const reader = new FileReader()
+    reader.onload = async (e) => {
+      const text = e.target?.result ?? ''
+      if (!(text instanceof ArrayBuffer)) {
+        text
+          .split('\n')
+          .map((x) => x.trim())
+          .forEach(onInput)
+      }
+    }
+    if (e.target.files) {
+      reader.readAsText(e.target.files[0])
+    }
+  }
 
   return (
     <section
@@ -44,6 +61,9 @@ const Console: FC<ConsoleProps> = ({ logs, onInput, className = '' }) => {
           }}
           placeholder="command"
         />
+      </div>
+      <div className="text-left flex flex-row">
+        <input type="file" name="filepick" onChange={readFile} />
       </div>
     </section>
   )
