@@ -36,6 +36,21 @@ export const queryHierarchy: ParseQuery[] = [
     query: 'remove (path|edge) from? [<from>.+] (to|>) [<to>.+]',
     keys: ['from', 'to'],
   },
+  {
+    type: 'SHORTEST_PATH',
+    query: 'sp from? [<from>.+] (to|>) [<to>.+]',
+    keys: ['from', 'to'],
+  },
+  {
+    type: 'ADD_ROBOT',
+    query: 'add (robot|bot) [<name>.+] at [<location>.+]',
+    keys: ['name', 'location'],
+  },
+  {
+    type: 'HELP',
+    query: 'need? help me?',
+    keys: [],
+  },
 ]
 
 export default function parse(query: string): ParseResult | null {
@@ -46,15 +61,9 @@ export default function parse(query: string): ParseResult | null {
     if (match.text() === '') continue
     let groups = match.groups() as any
     if (!groups) continue
-
-    console.log(`exploring ${queryType.type}`)
-    console.log(groups)
-
     let extracted: { [x: string]: string } = {}
     for (const queryKey of queryType.keys) {
-      console.log(Array.isArray(queryKey))
       if (!(queryKey in groups)) {
-        console.log(`${queryKey} not here`)
         return null
       }
       const view = (groups as any)[queryKey]
