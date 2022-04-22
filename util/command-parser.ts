@@ -47,6 +47,16 @@ export const queryHierarchy: ParseQuery[] = [
     keys: ['name', 'location'],
   },
   {
+    type: 'ADD_BOT_DEST',
+    query: 'move (robot|bot)? [<name>.+] to [<label>.+]',
+    keys: ['name', 'label'],
+  },
+  {
+    type: 'DELETE_BOT',
+    query: 'remove (robot|bot) [<name>.+]',
+    keys: ['name'],
+  },
+  {
     type: 'HELP',
     query: 'need? help me?',
     keys: [],

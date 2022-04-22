@@ -17,7 +17,11 @@ Removing paths
 Shortest path printer
     sp from? <waypointA> (to|>) <waypointB>
 Add robot
-add (robot|bot) <name> at <location>
+    add (robot|bot) <name> at <waypoint>
+Add robot destination
+    move (robot|bot)? <name> to <waypoint>
+Remove robot
+    remove (robot|bot) <name>
 `
 
 const runCommand = (
@@ -89,6 +93,18 @@ const mutationReducer = (
       const loc = map.locations[extracted['location'].trim()]
       const robo = new SimRobot(extracted['name'].trim(), loc)
       map.addRobot(robo)
+      break
+    case 'ADD_BOT_DEST':
+      const location = map.locations[extracted['label'].trim()]
+      const name = extracted['name'].trim()
+      map.addRobotDestination(name, location.label)
+      break
+    case 'DELETE_BOT':
+      const robot = map.robots[extracted['name'].trim()]
+      if (!robot.completedPathing()) {
+        throw new Error('Robot is not done with pathing. Cannot remove.')
+      }
+      delete map.robots[extracted['name'].trim()]
       break
     default:
       throw new Error('Unknown map mutation')

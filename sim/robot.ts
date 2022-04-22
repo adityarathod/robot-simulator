@@ -10,7 +10,7 @@ export default class SimRobot {
   currentY: number = 0
   color: string
   pathIdx: number
-  path: { from: string; to: string; x: number; y: number }[]
+  path: { from: string; to: string; x: number; y: number }[] = []
 
   constructor(name: string, startingPoint: SimLocation) {
     this.name = name
@@ -36,7 +36,7 @@ export default class SimRobot {
       return
     }
     this.path = path
-    console.log(path)
+    // console.log(path)
     this.pathIdx = 0
   }
 

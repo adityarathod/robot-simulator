@@ -222,7 +222,11 @@ export default class SimMap {
     if (!lbl) {
       throw new Error('Cannot find nearest point to robot')
     }
-    const { path } = this.findShortestPath(lbl, destination)
+    const { path, distance } = this.findShortestPath(lbl, destination)
+    console.log(distance)
+    if (distance === null || distance === Infinity) {
+      throw new Error('Unable to find path to point')
+    }
     const pathHash = this.hashPath(lbl, destination)
 
     let curArea = lbl
@@ -251,12 +255,13 @@ export default class SimMap {
 
   simulationStep() {
     Object.values(this.robots).forEach((robot) => {
-      console.log(this.inUse)
+      // console.log(this.inUse)
       const path = robot.currentPath()
       const prevPathIdx = robot.pathIdx
       if (!path) return
       const pathHash = this.hashPath(path.from, path.to)
-      const hashInUse = pathHash in this.inUse
+      const reversePathHash = this.hashPath(path.to, path.from)
+      const hashInUse = pathHash in this.inUse || reversePathHash in this.inUse
       const robotMatchesUser = this.inUse[pathHash] === robot.name
 
       if (!hashInUse) {

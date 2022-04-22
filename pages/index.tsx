@@ -9,10 +9,9 @@ import SimMap from '../sim/map'
 import runCommand from '../sim/interpreter'
 import SimRobot from '../sim/robot'
 import { SimLocation } from '../sim/types'
-import clone from '../util/clone'
 
-const ABOUT_MESSAGE = `robot sim 0.0.1 (fk this class) [incomplete]
-by adibytes
+const ABOUT_MESSAGE = `robot sim 1.0.0 [cs3354.004]
+by aditya rathod
 ==============
 `
 
@@ -54,7 +53,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="w-screen h-screen grid grid-cols-2 gap-0">
-        <MapView map={map} className="col-span-1" onStep={onStep} />
+        <MapView map={map} className="col-span-1" />
         <Console logs={logs} onInput={processInput} className="col-span-1" />
       </main>
     </div>
